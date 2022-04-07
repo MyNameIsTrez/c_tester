@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 22:50:36 by anonymous     #+#    #+#                 */
-/*   Updated: 2022/03/29 16:18:34 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/07 18:04:03 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 extern int write_call_count;
 extern int write_call_count_to_fail;
 extern bool was_write_unstable;
+
+////////////////////////////////////////////////////////////////////////////////
+
+ssize_t	ft_unstable_write(int fildes, const void *buf, size_t nbyte);
 
 ////////////////////////////////////////////////////////////////////////////////
 

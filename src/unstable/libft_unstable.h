@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 16:17:18 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/07 17:51:02 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/07 18:03:58 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@
 
 # include "libft_unstable_malloc.h"
 # include "libft_unstable_write.h"
-
-////////////////////////////////////////////////////////////////////////////////
-
-void	*ft_unstable_malloc(size_t size);
-ssize_t	ft_unstable_write(int fildes, const void *buf, size_t nbyte);
 
 ////////////////////////////////////////////////////////////////////////////////
 

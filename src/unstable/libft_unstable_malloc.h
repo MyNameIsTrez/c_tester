@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 22:50:40 by anonymous     #+#    #+#                 */
-/*   Updated: 2022/03/29 16:18:31 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/07 18:03:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 extern int malloc_call_count;
 extern int malloc_call_count_to_fail;
 extern bool was_malloc_unstable;
+
+////////////////////////////////////////////////////////////////////////////////
+
+void	*ft_unstable_malloc(size_t size);
 
 ////////////////////////////////////////////////////////////////////////////////
 

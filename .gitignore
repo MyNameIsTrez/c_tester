@@ -10,5 +10,8 @@
 # Allow repos to contain their own .gitignore
 !.gitignore
 
+# Allow Makefiles
+!Makefile
+
 # Miscellaneous
 !README.md
