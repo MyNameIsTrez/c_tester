@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Allow folders
+!*/
+
+# Allow .c and .h files
+!*.[ch]
+
+# Allow repos to contain their own .gitignore
+!.gitignore
+
+# Miscellaneous
+!README.md
