@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/08 15:39:04 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/08 15:42:05 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,6 @@ endif
 ifdef SAN
 CFLAGS += -fsanitize=address
 endif
-
-$(info FLAGS!!!!!!!!!)
-$(info $(CFLAGS))
 
 OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
 
