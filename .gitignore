@@ -12,6 +12,11 @@
 
 # Allow Makefiles
 !Makefile
+!*.mk
 
 # Miscellaneous
 !README.md
+
+!.normignore
+
+!ctester.sh

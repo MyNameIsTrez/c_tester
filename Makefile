@@ -6,9 +6,11 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/21 16:54:35 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/21 18:52:53 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
+export DEBUG=1
 
 ################################################################################
 
@@ -26,18 +28,17 @@ CC := cc
 SRC_DIR := src
 OBJ_DIR := obj
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -Wno-nullability-completeness
 
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
 
-HEADERS :=						\
-	$(LIBFT_DIR)/libft.h		\
-	$(MASSERT_DIR)/massert.h
+HEADERS := $(shell $(MAKE) -f headers.mk)
 
 LIB_NAMES :=					\
 	$(LIBFT_DIR)/libft.a		\
-	$(MASSERT_DIR)/libmassert.a
+	$(MASSERT_DIR)/libmassert.a	\
+	#to_test/libtests.a
 
 ################################################################################
 
@@ -68,23 +69,6 @@ LIB_FLAGS := $(sort $(addprefix -L,$(dir $(LIB_NAMES)))) $(sort $(patsubst lib%,
 
 ################################################################################
 
-TESTS_SRC_DIR := ../tests
-TESTS_OBJ_DIR := ../tests_obj
-
-TESTS_SOURCES := $(wildcard $(TESTS_SRC_DIR)/**/*.c) $(TESTS_SRC_DIR)/tester.c
-TESTS_OBJECTS := $(patsubst $(TESTS_SRC_DIR)/%,$(TESTS_OBJ_DIR)/%,$(TESTS_SOURCES:.c=.o))
-
-TESTS_HEADERS :=			\
-	../tests/libft_tests.h	\
-	src/ctester.h
-
-
-TESTS_INCLUDES := $(sort $(addprefix -I, $(dir $(TESTS_HEADERS))))
-
-TESTER_LIB_FLAGS := $(sort $(addprefix -L,$(dir $(TESTER_LIB_NAMES)))) $(sort $(patsubst lib%,-l%,$(basename $(notdir $(TESTER_LIB_NAMES)))))
-
-################################################################################
-
 .DEFAULT_GOAL := all
 
 CTESTER_OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
@@ -99,14 +83,14 @@ $(TESTS_OBJ_DIR)/%.o: $(TESTS_SRC_DIR)/%.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(TESTS_INCLUDES) -c $< -o $@
 
-.PHONE: MAKE_LIBFT MAKE_MASSERT
+.PHONY: MAKE_LIBFT MAKE_MASSERT
 
 ################################################################################
 
-all: $(PRE_RULES) MAKE_LIBFT MAKE_MASSERT $(TESTS_OBJECTS) $(CTESTER_OBJECT_PATHS) $(CTESTER_BINARY)
+all: $(PRE_RULES) $(CTESTER_BINARY)
 
-$(CTESTER_BINARY):
-	$(CC) $(CFLAGS) $(TESTER_INCLUDES) -g3 $(TESTS_OBJECTS) $(TESTER_LIB_FLAGS) -o $(CTESTER_BINARY)
+$(CTESTER_BINARY): MAKE_LIBFT MAKE_MASSERT $(CTESTER_OBJECT_PATHS)
+	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECT_PATHS) $(wildcard to_test/obj/tests/**/*.o) $(LIB_FLAGS) -o $(CTESTER_BINARY)
 	@echo "$(MAKE_DATA)" > $(DATA_FILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
@@ -128,7 +112,6 @@ clean:
 
 fclean: clean
 	rm -f $(CTESTER_BINARY)
-	rm -rf ../$(TESTS_OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(MASSERT_DIR) fclean
 
