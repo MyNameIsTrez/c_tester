@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/21 18:52:53 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/22 18:24:37 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ HEADERS := $(shell $(MAKE) -f headers.mk)
 LIB_NAMES :=					\
 	$(LIBFT_DIR)/libft.a		\
 	$(MASSERT_DIR)/libmassert.a	\
-	#to_test/libtests.a
+	# to_test/libtests.a
 
 ################################################################################
 
@@ -67,11 +67,11 @@ endif
 
 LIB_FLAGS := $(sort $(addprefix -L,$(dir $(LIB_NAMES)))) $(sort $(patsubst lib%,-l%,$(basename $(notdir $(LIB_NAMES)))))
 
+CTESTER_OBJECTS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
+
 ################################################################################
 
 .DEFAULT_GOAL := all
-
-CTESTER_OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
 
 MAKE_LIBFT:
 	$(MAKE) -C $(LIBFT_DIR) all
@@ -79,23 +79,21 @@ MAKE_LIBFT:
 MAKE_MASSERT:
 	$(MAKE) -C $(MASSERT_DIR) all
 
-$(TESTS_OBJ_DIR)/%.o: $(TESTS_SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(TESTS_INCLUDES) -c $< -o $@
+MAKE_TESTS:
+	$(MAKE) -C to_test all
 
-.PHONY: MAKE_LIBFT MAKE_MASSERT
+.PHONY: MAKE_LIBFT MAKE_MASSERT MAKE_TESTS
 
 ################################################################################
 
 all: $(PRE_RULES) $(CTESTER_BINARY)
 
-$(CTESTER_BINARY): MAKE_LIBFT MAKE_MASSERT $(CTESTER_OBJECT_PATHS)
-	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECT_PATHS) $(wildcard to_test/obj/tests/**/*.o) $(LIB_FLAGS) -o $(CTESTER_BINARY)
+$(CTESTER_BINARY): MAKE_LIBFT MAKE_MASSERT MAKE_TESTS $(CTESTER_OBJECTS)
+	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECTS) $(wildcard to_test/obj/tests/**/*.o) $(LIB_FLAGS) -o $(CTESTER_BINARY)
 	@echo "$(MAKE_DATA)" > $(DATA_FILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
-# TODO: $(LIB_FLAGS) can't be passed to compiler, only linker!
 	$(CC) $(CFLAGS) $(INCLUDES) -g3 -c $< -o $@
 
 .PHONY: all
