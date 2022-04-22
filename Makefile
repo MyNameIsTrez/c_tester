@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/22 18:24:37 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/22 18:35:22 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ HEADERS := $(shell $(MAKE) -f headers.mk)
 
 LIB_NAMES :=					\
 	$(LIBFT_DIR)/libft.a		\
-	$(MASSERT_DIR)/libmassert.a	\
-	# to_test/libtests.a
+	$(MASSERT_DIR)/libmassert.a
 
 ################################################################################
 
