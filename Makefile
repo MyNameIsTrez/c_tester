@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/26 17:02:34 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/26 18:41:01 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
 
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
-TESTS_DIR := to_test
+TESTS_DIR ?= ..
 
 HEADERS := $(shell $(MAKE) -f headers.mk)
 
