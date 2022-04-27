@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/27 15:21:18 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/27 16:26:02 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ $(CTESTER_BINARY):
 	$(error TESTS_DIR must be given)
 else
 $(CTESTER_BINARY): MAKE_LIBFT MAKE_MASSERT MAKE_TESTS $(CTESTER_OBJECTS)
-	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECTS) $(wildcard $(TESTS_DIR)/obj/tests/**/*.o) $(LIB_FLAGS) -o $(CTESTER_BINARY)
+	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECTS) $(shell find $(TESTS_DIR)/obj/tests -name "*.o") $(LIB_FLAGS) -o $(CTESTER_BINARY)
 	@echo "$(MAKE_DATA)" > $(DATA_FILE)
 endif
 
