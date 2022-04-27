@@ -2,9 +2,10 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-ln -s "$SCRIPT_DIR" "$(pwd)/libctester"
-make -C libctester TESTS_DIR="$(pwd)"
+ln -sn "$SCRIPT_DIR" "$(pwd)/libctester"
+
+make -C libctester TESTS_DIR="$(pwd)" --jobs=1
 
 if [ $# -eq 0 ]; then
-	./libctester/ctester
+	"$(pwd)/libctester/ctester"
 fi

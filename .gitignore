@@ -19,4 +19,4 @@
 
 !.normignore
 
-!ctester.sh
+!run_ctester.sh

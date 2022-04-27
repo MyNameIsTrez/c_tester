@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/26 18:41:01 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/27 15:21:18 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ export DEBUG=1
 
 ################################################################################
 
-SOURCES :=								\
-	src/unstable/ft_unstable_malloc.c	\
-	src/unstable/ft_unstable_write.c	\
+SOURCES :=\
+	src/unstable/ft_unstable_malloc.c\
+	src/unstable/ft_unstable_write.c\
 	src/ctester.c
 
 ################################################################################
@@ -35,12 +35,11 @@ CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
 
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
-TESTS_DIR ?= ..
 
 HEADERS := $(shell $(MAKE) -f headers.mk)
 
-LIB_NAMES :=					\
-	$(LIBFT_DIR)/libft.a		\
+LIB_NAMES :=\
+	$(LIBFT_DIR)/libft.a\
 	$(MASSERT_DIR)/libmassert.a
 
 ################################################################################
@@ -86,9 +85,14 @@ LIB_FLAGS := $(sort $(addprefix -L,$(dir $(LIB_NAMES)))) $(sort $(patsubst lib%,
 
 all: $(PRE_RULES) $(CTESTER_BINARY)
 
+ifndef TESTS_DIR
+$(CTESTER_BINARY):
+	$(error TESTS_DIR must be given)
+else
 $(CTESTER_BINARY): MAKE_LIBFT MAKE_MASSERT MAKE_TESTS $(CTESTER_OBJECTS)
 	$(CC) $(CFLAGS) -g3 $(CTESTER_OBJECTS) $(wildcard $(TESTS_DIR)/obj/tests/**/*.o) $(LIB_FLAGS) -o $(CTESTER_BINARY)
 	@echo "$(MAKE_DATA)" > $(DATA_FILE)
+endif
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)

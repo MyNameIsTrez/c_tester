@@ -4,10 +4,10 @@ include $(mkfile_dir)/libft/Makefile
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
 
-LIBCTESTER_HEADERS = 				\
-	$(addprefix libft/, $(HEADERS))	\
-	$(MASSERT_DIR)/massert.h		\
-	src/unstable/libft_unstable.h	\
+LIBCTESTER_HEADERS =\
+	$(addprefix libft/, $(HEADERS))\
+	$(MASSERT_DIR)/massert.h\
+	src/unstable/libft_unstable.h\
 	src/ctester.h
 
 get_headers:
