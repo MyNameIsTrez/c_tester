@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/21 17:58:42 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/04 18:12:37 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,25 +118,28 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define m_safe_assert(type, input, expected, on_error)	\
-{														\
-	was_malloc_unstable = false;						\
-	was_write_unstable = false;							\
-	type input_value = input;							\
-	(void)input_value;									\
-	if (was_malloc_unstable OR was_write_unstable)		\
-	{													\
-		massert(input_value, (type)on_error);			\
-	}													\
-	else												\
-	{													\
-		massert(input_value, (type)expected);			\
-	}													\
+#define m_safe_assert(type, input, expected, on_error, reset_unstables)	\
+{																		\
+	type input_value = input;											\
+	(void)input_value;													\
+	if (was_malloc_unstable OR was_write_unstable)						\
+	{																	\
+		massert(input_value, (type)on_error);							\
+	}																	\
+	else																\
+	{																	\
+		massert(input_value, (type)expected);							\
+	}																	\
+	if (reset_unstables)												\
+	{																	\
+		was_malloc_unstable = false;									\
+		was_write_unstable = false;										\
+	}																	\
 }
 
-#define m_safe_string_assert(input, expected)		\
-{													\
-	m_safe_assert(char *, input, expected, NULL);	\
+#define m_safe_string_assert(input, expected, reset_unstables)		\
+{																	\
+	m_safe_assert(char *, input, expected, NULL, reset_unstables);	\
 }
 
 ////////////////////////////////////////////////////////////////////////////////
