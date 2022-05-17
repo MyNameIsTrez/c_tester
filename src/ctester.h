@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/04 18:12:37 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/17 18:24:42 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 		test_lst_new_front(&g_tests_lst, &fn_info);								\
 	}																			\
 	void test_##name(void)
+
+////////////////////////////////////////////////////////////////////////////////
+
+#define BeforeMain(name)														\
+	__attribute__((constructor))												\
+	void before_main_##name(void)
+
+#define AfterMain(name)															\
+	__attribute__((destructor))													\
+	void after_main_##name(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 
