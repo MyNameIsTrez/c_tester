@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/04 16:27:33 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/19 13:00:55 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,19 @@ int	main(void)
 
 	int max_i = ft_max(malloc_call_count, write_call_count);
 	int write_fail_offset = max_i / 2;
-	int i = 1;
-	while (i <= max_i)
+	int iteration = 1;
+	while (iteration <= max_i)
 	{
-		printf("\nIteration %i:\n", i);
+		printf("\nIteration %i:\n", iteration);
 
 		malloc_call_count = 0;
 		write_call_count = 0;
-		malloc_call_count_to_fail = i;
-		write_call_count_to_fail = ((i + write_fail_offset) % max_i) + 1;
+		malloc_call_count_to_fail = iteration;
+		write_call_count_to_fail = ((iteration + write_fail_offset) % max_i) + 1;
 
 		run_tests();
 
-		i++;
+		iteration++;
 	}
 
 	printf("\nTests ran successfully!\n");
