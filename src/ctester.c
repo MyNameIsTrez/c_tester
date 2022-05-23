@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/19 13:00:55 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/23 13:19:11 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,17 @@ static void	run_tests(void)
 	{
 		t_fn_info *fn = lst->content;
 		printf("Testing function '%s'\n", fn->fn_name);
+		fflush(stdout);
 		fn->fn_ptr();
 		lst = lst->next;
 	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+AfterMain(check_leaks)
+{
+	system("leaks -q tester");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +87,7 @@ int	main(void)
 	int iteration = 1;
 	while (iteration <= max_i)
 	{
-		printf("\nIteration %i:\n", iteration);
+		printf("\nIteration %i / %i:\n", iteration, max_i);
 
 		malloc_call_count = 0;
 		write_call_count = 0;
@@ -92,8 +100,6 @@ int	main(void)
 	}
 
 	printf("\nTests ran successfully!\n");
-
-	system("leaks tester");
 
 	return (EXIT_SUCCESS);
 }
