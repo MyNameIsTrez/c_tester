@@ -10,8 +10,8 @@ LIBCTESTER_HEADERS =\
 	src/unstable/libft_unstable.h\
 	src/ctester.h
 
+.PHONY: get_headers
 get_headers:
 	@echo $(LIBCTESTER_HEADERS)
 
 .DEFAULT_GOAL := get_headers
-.PHONY: get_headers

@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/04/27 18:25:26 by sbos          ########   odam.nl          #
+#    Updated: 2022/06/20 15:41:49 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ HEADERS := $(shell $(MAKE) -f headers.mk)
 
 LIB_NAMES :=\
 	$(MASSERT_DIR)/libmassert.a\
+	$(LIBFT_DIR)/libft.a\
 	$(addprefix $(TESTS_DIR)/, $(shell $(MAKE) -C $(TESTS_DIR) get_libs))
 
 ################################################################################
@@ -83,6 +84,7 @@ LIB_FLAGS := $(sort $(addprefix -L,$(dir $(LIB_NAMES)))) $(sort $(patsubst lib%,
 
 ################################################################################
 
+.PHONY: all
 all: $(PRE_RULES) $(CTESTER_BINARY)
 
 ifndef TESTS_DIR
@@ -98,20 +100,19 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDES) -g3 -c $< -o $@
 
-.PHONY: all
-
 ################################################################################
 
+.PHONY: clean
 clean:
 	rm -rf $(OBJ_DIR)
 
+.PHONY: fclean
 fclean: clean
 	rm -f $(CTESTER_BINARY)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(MASSERT_DIR) fclean
 
+.PHONY: re
 re: fclean all
-
-.PHONY: clean fclean re
 
 ################################################################################
