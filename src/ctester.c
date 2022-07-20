@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/23 13:19:11 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/20 17:22:33 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ static void	run_tests(void)
 		printf("Testing function '%s'\n", fn->fn_name);
 		fflush(stdout);
 		fn->fn_ptr();
+
+		vector_clean_up();
+
+		was_malloc_unstable = false;
+		was_write_unstable = false;
+
+		ft_set_error(FT_OK);
+
 		lst = lst->next;
 	}
 }
