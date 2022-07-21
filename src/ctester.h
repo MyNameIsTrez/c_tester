@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/21 11:30:03 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/21 14:56:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 {\
 	char	*inp = input_str;\
 	m_safe_string_assert(inp, expected, reset_unstables);\
-	free(inp);\
+	ft_free(&inp);\
 }
 
 ////////////////////////////////////////////////////////////////////////////////
