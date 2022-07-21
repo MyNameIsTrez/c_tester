@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/20 17:22:33 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/21 11:27:27 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+int malloc_call_count = 0;
+int malloc_call_count_to_fail = 0;
+bool was_malloc_unstable = 0;
+
+int write_call_count = 0;
+int write_call_count_to_fail = 0;
+bool was_write_unstable = 0;
+
+////////////////////////////////////////////////////////////////////////////////
+
 t_list *g_tests_lst = NULL;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// This function has to be redefined here cause it normally calls ft_unstable_malloc
+// This function has to be redefined here cause it normally calls ft_malloc
 // and that could prevent tests from being run.
 t_list	*test_lstnew(void *content)
 {
@@ -34,7 +44,7 @@ t_list	*test_lstnew(void *content)
 	return (lst);
 }
 
-// This function has to be redefined here cause it normally calls ft_unstable_malloc
+// This function has to be redefined here cause it normally calls ft_malloc
 // and that could prevent tests from being run.
 t_list	*test_lst_new_front(t_list **lst, void *content)
 {

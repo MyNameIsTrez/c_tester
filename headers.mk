@@ -7,7 +7,7 @@ MASSERT_DIR := libmassert
 LIBCTESTER_HEADERS =\
 	$(addprefix libft/, $(HEADERS))\
 	$(MASSERT_DIR)/massert.h\
-	src/unstable/libft_unstable.h\
+	src/ctester_globals.h\
 	src/ctester.h
 
 .PHONY: get_headers

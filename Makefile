@@ -6,17 +6,13 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/06/20 15:41:49 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/21 12:03:11 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-export DEBUG=1
 
 ################################################################################
 
 SOURCES :=\
-	src/unstable/ft_unstable_malloc.c\
-	src/unstable/ft_unstable_write.c\
 	src/ctester.c
 
 ################################################################################
@@ -31,7 +27,6 @@ OBJ_DIR := obj
 CFLAGS := -Wall -Wextra -Werror
 CFLAGS += -DSTATIC=
 CFLAGS += -g3 -Wconversion
-CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
 
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert

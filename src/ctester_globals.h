@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   libft_unstable_write.h                             :+:    :+:            */
+/*   ctester_globals.h                                  :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
+/*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/25 22:50:36 by anonymous     #+#    #+#                 */
-/*   Updated: 2022/04/07 18:04:03 by sbos          ########   odam.nl         */
+/*   Created: 2022/04/05 15:33:56 by sbos          #+#    #+#                 */
+/*   Updated: 2022/07/21 11:29:58 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef LIBFT_UNSTABLE_WRITE_H
-# define LIBFT_UNSTABLE_WRITE_H
+#ifndef CTESTER_GLOBALS_H
+# define CTESTER_GLOBALS_H
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <stdbool.h>	// bool
-
-////////////////////////////////////////////////////////////////////////////////
+extern int malloc_call_count;
+extern int malloc_call_count_to_fail;
+extern bool was_malloc_unstable;
 
 extern int write_call_count;
 extern int write_call_count_to_fail;
 extern bool was_write_unstable;
-
-////////////////////////////////////////////////////////////////////////////////
-
-ssize_t	ft_unstable_write(int fildes, const void *buf, size_t nbyte);
 
 ////////////////////////////////////////////////////////////////////////////////
 
