@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/22 11:56:14 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 13:08:32 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	main(void)
 
 	printf("\nTests ran successfully!\n");
 
-	ft_free_mallocs();
+	ft_free_allocations();
 
 	return (EXIT_SUCCESS);
 }
