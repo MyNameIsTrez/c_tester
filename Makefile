@@ -29,6 +29,7 @@ SRC_DIR := src
 OBJ_DIR := obj
 
 CFLAGS := -Wall -Wextra -Werror
+CFLAGS += -O3
 CFLAGS += -DSTATIC=
 CFLAGS += -g3 -Wconversion
 
