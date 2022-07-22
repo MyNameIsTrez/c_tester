@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/21 14:56:28 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 17:09:14 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 	if (was_malloc_unstable OR was_write_unstable)									\
 	{																				\
 		massert(ret_value, (ssize_t)(on_error));									\
+		close(fd);																	\
 	}																				\
 	else																			\
 	{																				\
@@ -125,8 +126,11 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 		lseek(fd, 0, SEEK_SET);														\
 		read(fd, buf, (size_t)file_size);											\
 		massert(buf, ret);															\
+		/* Deliberately not calling close() after fclose(): */						\
+		/* https://stackoverflow.com/a/13691168/13279557 */							\
+		fclose(f);																	\
 	}																				\
-	close(fd);																		\
+	close(stdout_fd);																\
 }
 
 ////////////////////////////////////////////////////////////////////////////////
