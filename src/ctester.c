@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/21 16:22:34 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 11:56:14 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,22 @@ t_list	*test_lst_new_front(t_list **lst, void *content)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static void	run_tests(void)
+static void	run_tests(int iteration, int max_iterations)
 {
 	t_list	*lst = g_tests_lst;
 	while (lst != NULL)
 	{
 		t_fn_info *fn = lst->content;
+
+#ifdef PRINT_TESTS
+		printf("Iteration %i / %i: ", iteration, max_iterations);
 		printf("Testing function '%s'\n", fn->fn_name);
 		fflush(stdout);
+#else
+		(void)iteration;
+		(void)max_iterations;
+#endif
+
 		fn->fn_ptr();
 
 		vector_clean_up();
@@ -98,21 +106,23 @@ int	main(void)
 	malloc_call_count_to_fail = 0;
 	write_call_count_to_fail = 0;
 
-	run_tests();
+	run_tests(0, 0);
 
-	int max_i = ft_max(malloc_call_count, write_call_count);
-	int write_fail_offset = max_i / 2;
+	int max_iterations = ft_max(malloc_call_count, write_call_count);
+	int write_fail_offset = max_iterations / 2;
 	int iteration = 1;
-	while (iteration <= max_i)
+	while (iteration <= max_iterations)
 	{
-		printf("\nIteration %i / %i:\n", iteration, max_i);
+#ifndef PRINT_TESTS
+		printf("Iteration %i / %i\n", iteration, max_iterations);
+#endif
 
 		malloc_call_count = 0;
 		write_call_count = 0;
 		malloc_call_count_to_fail = iteration;
-		write_call_count_to_fail = ((iteration + write_fail_offset) % max_i) + 1;
+		write_call_count_to_fail = ((iteration + write_fail_offset) % max_iterations) + 1;
 
-		run_tests();
+		run_tests(iteration, max_iterations);
 
 		iteration++;
 	}

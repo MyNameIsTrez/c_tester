@@ -11,6 +11,9 @@ fi
 if [[ $(echo $@ | grep "SAN") != "" ]]; then
 	MAKE_ARGS+=" SAN=1" # the space is intentional to split the args
 fi
+if [[ $(echo $@ | grep "PRINT_TESTS") != "" ]]; then
+	MAKE_ARGS+=" PRINT_TESTS=1" # the space is intentional to split the args
+fi
 
 
 make -C libctester TESTS_DIR="$(pwd)" $MAKE_ARGS --jobs=1

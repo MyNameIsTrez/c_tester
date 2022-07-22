@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/07/21 17:11:01 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/22 11:55:58 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,10 @@ LIB_NAMES :=\
 
 ifdef SAN
 CFLAGS += -fsanitize=address
+endif
+
+ifdef PRINT_TESTS
+CFLAGS += -DPRINT_TESTS
 endif
 
 # sort removes duplicates
