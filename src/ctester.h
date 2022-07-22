@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/22 17:09:14 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 18:24:22 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,12 @@ t_list	*test_lst_new_front(t_list **lst, void *content);
 #define m_safe_string_assert(input_str, expected, reset_unstables)\
 {\
 	m_safe_assert(char *, input_str, expected, NULL, reset_unstables);\
+}
+
+#define m_safe_malloc_assert(input, reset_unstables)\
+{\
+	void	*ptr = input;\
+	m_safe_assert(void *, ptr, ptr, NULL, reset_unstables);\
 }
 
 #define m_safe_string_assert_free(input_str, expected, reset_unstables)\
