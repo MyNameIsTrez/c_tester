@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/07/22 11:55:58 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/22 12:08:37 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRC_DIR := src
 OBJ_DIR := obj
 
 CFLAGS := -Wall -Wextra -Werror
-CFLAGS += -O3
 CFLAGS += -DSTATIC=
 CFLAGS += -g3 -Wconversion
 
@@ -51,6 +50,10 @@ endif
 
 ifdef PRINT_TESTS
 CFLAGS += -DPRINT_TESTS
+endif
+
+ifdef O3
+CFLAGS += -O3
 endif
 
 # sort removes duplicates

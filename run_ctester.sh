@@ -6,13 +6,16 @@ ln -snf "$SCRIPT_DIR" "$(pwd)/libctester"
 
 MAKE_ARGS=""
 if [[ $(echo $@ | grep "DEBUG") != "" ]]; then
-	MAKE_ARGS+=" DEBUG=1" # the space is intentional to split the args
+	MAKE_ARGS+=" DEBUG=1"
 fi
 if [[ $(echo $@ | grep "SAN") != "" ]]; then
-	MAKE_ARGS+=" SAN=1" # the space is intentional to split the args
+	MAKE_ARGS+=" SAN=1"
 fi
 if [[ $(echo $@ | grep "PRINT_TESTS") != "" ]]; then
-	MAKE_ARGS+=" PRINT_TESTS=1" # the space is intentional to split the args
+	MAKE_ARGS+=" PRINT_TESTS=1"
+fi
+if [[ $(echo $@ | grep "O3") != "" ]]; then
+	MAKE_ARGS+=" O3=1"
 fi
 
 
