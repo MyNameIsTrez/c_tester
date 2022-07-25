@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/22 21:43:39 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/25 16:08:19 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ static void	run_tests(int iteration, int max_iterations)
 
 		int temp = open(".", O_RDONLY);
 		// TODO: Change back to the minimum of 3
-		if (temp > 10)
+		if (temp > 3)
 		{
 			printf("ctester found a file descriptor leak!");
 			massert(42, 69);
 		}
 		close(temp);
 
-		ft_vector_clean_up();
+		ft_free_allocations();
 
 		was_malloc_unstable = false;
 		was_write_unstable = false;
