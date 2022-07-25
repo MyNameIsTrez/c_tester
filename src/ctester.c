@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:07:20 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/25 16:08:19 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/25 16:21:21 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_list	*test_lst_new_front(t_list **lst, void *content)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static void	run_tests(int iteration, int max_iterations)
+static void	run_tests(int iteration, int max_iterations, int starting_fd)
 {
 	t_list	*lst = g_tests_lst;
 	while (lst != NULL)
@@ -77,14 +77,14 @@ static void	run_tests(int iteration, int max_iterations)
 
 		fn->fn_ptr();
 
-		int temp = open(".", O_RDONLY);
-		// TODO: Change back to the minimum of 3
-		if (temp > 3)
+		int fd_after_test = open(".", O_RDONLY);
+		close(fd_after_test);
+
+		if (fd_after_test > starting_fd)
 		{
 			printf("ctester found a file descriptor leak!");
 			massert(42, 69);
 		}
-		close(temp);
 
 		ft_free_allocations();
 
@@ -115,7 +115,10 @@ int	main(void)
 	malloc_call_count_to_fail = 0;
 	write_call_count_to_fail = 0;
 
-	run_tests(0, 0);
+	int starting_fd = open(".", O_RDONLY);
+	close(starting_fd);
+
+	run_tests(0, 0, starting_fd);
 
 	int max_iterations = ft_max(malloc_call_count, write_call_count);
 	int write_fail_offset = max_iterations / 2;
@@ -131,7 +134,7 @@ int	main(void)
 		malloc_call_count_to_fail = iteration;
 		write_call_count_to_fail = ((iteration + write_fail_offset) % max_iterations) + 1;
 
-		run_tests(iteration, max_iterations);
+		run_tests(iteration, max_iterations, starting_fd);
 
 		iteration++;
 	}
