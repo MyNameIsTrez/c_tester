@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/07/22 12:08:37 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/25 14:28:00 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ CFLAGS += -g3 -Wconversion
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
 
-HEADERS := $(shell $(MAKE) -f headers.mk)
+HEADERS := $(shell $(MAKE) -f headers.mk get_headers)
+
+INCLUDES_HEADERS := $(shell $(MAKE) -f headers.mk get_includes_headers)
 
 LIB_NAMES :=\
 	$(MASSERT_DIR)/libmassert.a\
@@ -58,7 +60,7 @@ endif
 
 # sort removes duplicates
 # TODO: Switch around addprefix and sort so it's consistent with the rest of the file.
-INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
+INCLUDES := $(addprefix -I, $(sort $(dir $(INCLUDES_HEADERS))))
 
 # Automatically calls the "clean" rule whenever CFLAGS or SOURCES is changed.
 DATA_FILE := .make_data
