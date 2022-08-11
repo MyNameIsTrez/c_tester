@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/20 14:18:07 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/22 18:24:22 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/29 13:03:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ extern t_list	*g_tests_lst;
 
 // TODO: Can these declarations be removed?
 t_list	*test_lstnew(void *content);
-t_list	*test_lst_new_front(t_list **lst, void *content);
+t_list	*test_lst_new_front(t_list **lst_ptr, void *content);
 
 ////////////////////////////////////////////////////////////////////////////////
 
