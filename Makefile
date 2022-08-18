@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/07/25 14:28:00 by sbos          ########   odam.nl          #
+#    Updated: 2022/08/18 15:02:12 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ CC := cc
 SRC_DIR := src
 OBJ_DIR := obj
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -Wconversion
 CFLAGS += -DSTATIC=
-CFLAGS += -g3 -Wconversion
+CFLAGS += -g3
 
 LIBFT_DIR := libft
 MASSERT_DIR := libmassert
@@ -51,7 +51,7 @@ CFLAGS += -fsanitize=address
 endif
 
 ifdef PRINT_TESTS
-CFLAGS += -DPRINT_TESTS
+CFLAGS += -DPRINT_TESTS=1
 endif
 
 ifdef O3
